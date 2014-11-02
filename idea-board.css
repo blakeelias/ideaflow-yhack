@@ -84,3 +84,7 @@ a.subideas{
 	color:red; 
 	font-weight:bold;
 }
+
+.show {
+	display: block
+}

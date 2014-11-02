@@ -51,6 +51,7 @@ Router.route('/idea/:_id(*)', function () {
 
     Session.setDefault("current_idea", {_id: null});
     Session.setDefault("current_view", "list");
+    Session.setDefault("importShow", false);
 
 
     var ideaHelpers={
@@ -375,7 +376,12 @@ Router.route('/idea/:_id(*)', function () {
 
     isListView: function() {
       return Session.get("current_view")!=="graph";
+    },
+
+    importShow: function() {
+      return Session.get("importShow") ? "show" : "";
     }
+
   });
 
   Template.idea_board.events({
@@ -385,6 +391,11 @@ Router.route('/idea/:_id(*)', function () {
     },
 
     'a.breadcrumb click': function(){
+      // history.pushState({}, '', $(event.target).attr("href"));
+      // return false;
+    }
+    'a#import-link click': function(){
+      Session.set("importShow",!Session.get("importShow"))
       // history.pushState({}, '', $(event.target).attr("href"));
       // return false;
     }

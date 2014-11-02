@@ -62,6 +62,16 @@
       <ul class="nav navbar-nav">
         <li class="{{#if isListView}}active{{/if}}"><a href="?list">List View</a></li>
         <li class="{{#unless isListView}}active{{/unless}}"><a href="?graph">Graph View</a></li>
+        <li><a href="#" id="import-link">Import</a></li>
+        <div id="import-container {{importShow}}">
+        <textarea id="import-nodes">  
+
+        </textarea>
+        <textarea id="import-edges">  
+
+        </textarea>
+        </div>
+
       </ul>
       <form class="navbar-form navbar-right" role="search">
         <div class="form-group">
