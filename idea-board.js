@@ -49,6 +49,9 @@ Router.route('/idea/:_id(*)', function () {
 
   if (Meteor.isClient) {
 
+
+
+
     Session.setDefault("current_idea", {_id: null});
     Session.setDefault("current_view", "list");
     Session.setDefault("importShow", false);
@@ -282,6 +285,8 @@ Router.route('/idea/:_id(*)', function () {
 
   Template.idea_board.created = function() {
 
+
+
     Deps.autorun(function() {
       // This find() can be any reactive datasource
       var ideas = Ideas.find(Session.get("current_idea")).fetch();
@@ -297,6 +302,21 @@ Router.route('/idea/:_id(*)', function () {
                             queryKey: 'text'
                     });
       }
+
+      var initializing = true;
+      Ideas.find().observeChanges({
+        added: function(id, doc) {
+          
+          if (!initializing) {
+            // console.log(doc);
+          }
+        }
+      });
+      initializing = false;
+
+
+
+
     });
   }
 

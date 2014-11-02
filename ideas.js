@@ -684,6 +684,7 @@ if (Meteor.isServer) {
     Meteor.startup(function() {
   
 
+
         iray=[]
        if (Ideas.find().count() === 0) {
             root_id = insertIdea({text: "Hackathon Ideas"});
@@ -721,6 +722,8 @@ if (Meteor.isServer) {
             // insertIdea(sampleIdea);
        }
 
+
+  
 
     });
 }
