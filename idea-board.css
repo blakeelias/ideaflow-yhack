@@ -27,6 +27,11 @@ a.subideas{
   
 }
 
+text {
+	-webkit-user-select: none;
+	-moz-user-select: none;
+}
+
 .link {
   stroke: #aaa;
   stroke-width: 1.5px;
