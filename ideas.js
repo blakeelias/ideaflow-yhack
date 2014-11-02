@@ -663,12 +663,26 @@ insertIdea = function(ideaData){
     return Ideas.insert(ideaData);
 }
 
+insertRelationBi = function(src, target, relationship) {
+      if (typeof relationship === 'undefined'){
+        relationship = {weight:1,reviewed:true};
+      }
+
+      var newRelation ={}
+      newRelation["relations."+target]=relationship
+
+     Ideas.update({_id:src},{$set: newRelation})
+
+     var newRelationBack ={}
+     newRelationBack["relations."+src]=relationship
+     Ideas.update({_id:target},{$set: newRelationBack})     
+
+  }
 
 if (Meteor.isServer) {
 
     Meteor.startup(function() {
-        Ideas.remove({})
-
+  
 
         iray=[]
        if (Ideas.find().count() === 0) {

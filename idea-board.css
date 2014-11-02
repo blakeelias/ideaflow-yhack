@@ -90,6 +90,17 @@ text {
 	font-weight:bold;
 }
 
-.show {
-	display: block
+
+
+.import-container {
+	display: none;
+}
+
+.import-container.show {
+	display: block;
+	position: absolute;
+	top: 60px;
+	background: #efefef;
+	width: 450px;
+	padding: 20px;
 }

@@ -62,14 +62,17 @@
       <ul class="nav navbar-nav">
         <li class="{{#if isListView}}active{{/if}}"><a href="?list">List View</a></li>
         <li class="{{#unless isListView}}active{{/unless}}"><a href="?graph">Graph View</a></li>
-        <li><a href="#" id="import-link">Import</a></li>
-        <div id="import-container {{importShow}}">
-        <textarea id="import-nodes">  
-
-        </textarea>
-        <textarea id="import-edges">  
-
-        </textarea>
+        <li><a href="#" class="import-link">Import</a></li>
+  
+        <div class="import-container {{importShow}}">
+          
+          <textarea class="import-nodes">Nodes (json)
+          </textarea>
+          <textarea class="import-edges">Edges (json)
+          </textarea> <br>
+          <input type="text" class="import-text-param" placeholder="(text param)"/>
+          <input type="text" class="import-detail-param" placeholder="(detail param)"/>
+          <input type="button" class="import-submit" value="Import" />
         </div>
 
       </ul>
