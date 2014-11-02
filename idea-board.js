@@ -108,8 +108,9 @@ Router.route('/idea/:_id(*)', function () {
 
       var manuallyReviewedRelations={}
       for (key in this.relations) {
-          if (this.relations[key].reviewed)
-            manuallyReviewedRelations[key] = this.relations[key];
+        if (this.relations[key].reviewed && this.relations[key].weight > 0)
+          console.log(this.relations[key].weight)
+          manuallyReviewedRelations[key] = this.relations[key];
       }
 
       return _.map(manuallyReviewedRelations, function(val, key) {
@@ -160,6 +161,8 @@ Router.route('/idea/:_id(*)', function () {
 
      var setReviewed ={}
      setReviewed["relations."+this.targetIdea._id+".reviewed"]=true;
+     setReviewed["relations."+this.targetIdea._id+".weight"]=0;
+     
      var oneDeny ={}
      oneDeny["relations."+this.targetIdea._id+".denies"]=1;
 
@@ -306,8 +309,30 @@ Router.route('/idea/:_id(*)', function () {
       var initializing = true;
       Ideas.find().observeChanges({
         added: function(id, doc) {
-          
+
           if (!initializing) {
+
+            // //Ideas.find({relations: {&lt: 3, relations: }}) 
+            //             insertRelationBi(id,data.results['0']._id)
+            // insertRelationBi(id,data.results['1']._id)
+            // insertRelationBi(id,data.results['2']._id)
+
+            // $.ajax({
+            //   url: 'http://localhost:5000/compute_suggested_relations',
+            //   data: {text:doc.text},
+            //   jsonpCallback: 'jsonpCallback',
+            //   contentType: "application/json",
+            //   dataType: 'jsonp',
+            //   success:  function(data) {
+                
+            //     console.log(data)
+
+            //     insertRelationBi(id,data.results['0']._id)
+            //     insertRelationBi(id,data.results['1']._id)
+            //     insertRelationBi(id,data.results['2']._id)
+            //   }
+            // });
+
             // console.log(doc);
           }
         }
@@ -421,6 +446,17 @@ Router.route('/idea/:_id(*)', function () {
       // return false;
     },
 
+    'click .suggest-relations': function(e,t){
+      
+      var is = Ideas.find({parent_id: Session.get("current_idea")._id}).fetch();
+      is.forEach(function(idea) {
+        if (Math.random()>.7) {
+          console.log("reladded")
+          Meteor.call('insertRelationBiServer',idea._id, is[Math.floor(is.length * Math.random())]._id,  {weight: 1, reviewed: false})
+        }
+      })
+                
+    },
     'click .import-submit': function(e,t){
       var nodes = false;
       var edges = false;

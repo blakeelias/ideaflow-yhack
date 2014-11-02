@@ -696,7 +696,7 @@ if (Meteor.isServer) {
                 idea["status"] = 0;
 
                 while(Math.random() < 0.5 && iray.length > 20){
-                    idea["relations"][iray[Math.floor(iray.length * Math.random())]] = {weight: 1, reviewed: true};
+                    idea["relations"][iray[Math.floor(iray.length * Math.random())]] = {weight: 1, reviewed: false};
                 }
                 
 
